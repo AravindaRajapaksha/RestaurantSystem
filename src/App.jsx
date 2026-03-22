@@ -24,8 +24,61 @@ import Faq from './pages/Faq';
 import Terms from './pages/Terms';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
+import { supabaseConfigError } from './lib/supabase';
 
 function App() {
+  if (supabaseConfigError) {
+    return (
+      <div
+        className="container"
+        style={{
+          minHeight: '100vh',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          paddingTop: '2rem',
+          paddingBottom: '2rem',
+        }}
+      >
+        <div
+          className="glass-panel"
+          style={{
+            width: '100%',
+            maxWidth: '720px',
+            padding: '2rem',
+            borderRadius: '20px',
+            textAlign: 'left',
+          }}
+        >
+          <span className="badge badge-primary">Deployment setup required</span>
+          <h1 style={{ marginTop: '1rem', marginBottom: '1rem' }}>Supabase keys are missing</h1>
+          <p style={{ marginBottom: '1rem' }}>
+            This build cannot start because the required Vite environment variables are not set.
+          </p>
+          <p style={{ marginBottom: '1rem' }}>
+            Add these values in Vercel Project Settings under Environment Variables, then redeploy:
+          </p>
+          <pre
+            style={{
+              margin: 0,
+              padding: '1rem',
+              borderRadius: '12px',
+              overflowX: 'auto',
+              background: 'rgba(0, 0, 0, 0.28)',
+              color: 'var(--text-primary)',
+            }}
+          >
+{`VITE_SUPABASE_URL=...
+VITE_SUPABASE_ANON_KEY=...`}
+          </pre>
+          <p style={{ marginTop: '1rem' }}>
+            Current issue: {supabaseConfigError}
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <AuthProvider>
       <FoodsProvider>

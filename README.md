@@ -26,6 +26,8 @@ VITE_SUPABASE_URL=your_supabase_project_url
 VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
 
+For Vercel deployments, add the same two variables in Project Settings -> Environment Variables and redeploy.
+
 ## Database Setup
 
 Use the SQL editor in Supabase and run one of these scripts:
